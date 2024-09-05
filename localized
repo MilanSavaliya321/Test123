@@ -1,0 +1,15 @@
+extension String {
+    func localized() -> String {
+        
+        var langCode = Locale.current.languageCode
+        if langCode == "zh" {
+            langCode = "zh-Hant"
+        } else if langCode == "pt" || langCode == "pt-BR" {
+            langCode = "pt-PT"
+        }
+        
+        let path = Bundle.main.path(forResource: langCode, ofType: "lproj")
+        let bundle = Bundle(path: path!)
+        return NSLocalizedString(self, tableName: nil, bundle: bundle!, value: "", comment: "")
+    }
+}
